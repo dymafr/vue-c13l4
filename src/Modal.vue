@@ -1,48 +1,21 @@
 <template>
-  <button @click="open = true" class="btn btn-primary">
-    Confirmer l'achat
-  </button>
-  <Teleport to="body">
-    <div
-      v-if="open"
-      @click="open = false"
-      class="calc d-flex flex-row justify-content-center align-items-center"
-    >
-      <div @click.stop class="modal-container">
-        <h3>Confirmation de votre commande</h3>
-        <ul>
-          <li>Du contenu</li>
-          <li>Du contenu</li>
-          <li>Du contenu</li>
-        </ul>
-        <button @click.stop="open = false" class="btn btn-danger">
-          Confirmer la commande
-        </button>
-      </div>
-    </div>
-  </Teleport>
+  <div class="p-20">
+    <ul>
+      <li v-for="user of state.users">{{ user.name }}</li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
-const open = ref(false);
+const state = reactive<{ users: any[] }>({ users: [] });
+
+async function fetchUsers {
+  state.users = await (await fetch('https://restapi.fr/api/vueusers')).json()
+}
+
+fetchUsers();
 </script>
 
-<style lang="scss">
-.calc {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
-}
-
-.modal-container {
-  background-color: white;
-  border-radius: var(--border-radius);
-  border: var(--border);
-  padding: 30px;
-}
-</style>
+<style lang="scss"></style>
