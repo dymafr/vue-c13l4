@@ -11,8 +11,8 @@ import { reactive } from 'vue';
 
 const state = reactive<{ users: any[] }>({ users: [] });
 
-async function fetchUsers {
-  state.users = await (await fetch('https://restapi.fr/api/vueusers')).json()
+async function fetchUsers() {
+  state.users = await (await fetch('https://restapi.fr/api/vueusers')).json();
 }
 
 fetchUsers();
