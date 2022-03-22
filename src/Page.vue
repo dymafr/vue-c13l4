@@ -1,16 +1,21 @@
 <template>
-  <div class="p-20 container">
-    <h3>PAGE</h3>
-    <Modal />
+  <div class="p-20">
+    <ul>
+      <li v-for="user of state.users">{{ user.name }}</li>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import Modal from './Modal.vue';
+import { reactive } from 'vue';
+
+const state = reactive<{ users: any[] }>({ users: [] });
+
+async function fetchUsers {
+  state.users = await (await fetch('https://restapi.fr/api/vueusers')).json()
+}
+
+fetchUsers();
 </script>
 
-<style lang="scss">
-.container {
-  position: relative;
-}
-</style>
+<style lang="scss"></style>
