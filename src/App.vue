@@ -1,6 +1,9 @@
 <template>
   <Suspense>
     <LazyList />
+    <template #fallback>
+      <h1>Chargement...</h1>
+    </template>
   </Suspense>
 </template>
 
