@@ -1,21 +1,11 @@
 <template>
-  <div class="p-20">
-    <ul>
-      <li v-for="user of state.users">{{ user.name }}</li>
-    </ul>
-  </div>
+  <Suspense>
+    <Liste />
+  </Suspense>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
-
-const state = reactive<{ users: any[] }>({ users: [] });
-
-async function fetchUsers() {
-  state.users = await (await fetch('https://restapi.fr/api/vueusers')).json();
-}
-
-fetchUsers();
+import Liste from './Liste.vue';
 </script>
 
 <style lang="scss"></style>
