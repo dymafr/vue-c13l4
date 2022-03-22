@@ -11,6 +11,7 @@ import { reactive } from 'vue';
 
 const state = reactive<{ users: any[] }>({ users: [] });
 
+// Délai de 3secondes grâce à l'option delay de restapi
 state.users = await (
   await fetch('https://restapi.fr/api/vueusers?delay=3')
 ).json();
